@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musleapp/pages/main_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color.fromRGBO(252, 250, 227, 1),
         primarySwatch: Colors.yellow,
       ),
-      home: const MyHomePage(title: ''),
+      home: const MainPage(),
     );
   }
 }
