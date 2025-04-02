@@ -15,7 +15,15 @@ class Weekbar extends StatelessWidget{
         height: 25,
         margin: EdgeInsets.only(bottom: 20),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(50.0)),
+          boxShadow: [
+            BoxShadow(
+              color: const Color.fromARGB(255, 191, 191, 191), // Shadow color with opacity
+              spreadRadius: 0.25, // Spread value
+              blurRadius: 10, // Blur value
+              offset: Offset(0, 0), // Offset (horizontal, vertical)
+            ),
+          ],
+          borderRadius: BorderRadius.horizontal(right: Radius.circular(50.0)),
           color: weekBarColor,
         ),
         

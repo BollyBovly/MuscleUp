@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musleapp/design/colors.dart';
 import 'package:musleapp/pages/main_page.dart';
 
 void main() {
@@ -11,9 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Musle Up',
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromRGBO(252, 250, 227, 1),
+        scaffoldBackgroundColor: backgroundColor,
         primarySwatch: Colors.yellow,
       ),
       home: const MainPage(),
