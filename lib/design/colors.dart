@@ -11,3 +11,5 @@ const Color weekBarColor = Color(0xFFFFFFFF);
 const Color circleColor = Color(0xFFFFFFFF);
 
 const Color elevationColor = Color.fromARGB(255, 224, 224, 224);
+
+const Color timerColor = Color.fromARGB(255, 164, 164, 164);
