@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:musleapp/design/colors.dart';
 import 'package:musleapp/pages/approach_timer.dart';
 import 'package:musleapp/pages/main_page.dart';
+import 'package:musleapp/pages/trining_start.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       home: const MainPage(),
       routes: <String, WidgetBuilder>{
         '/home':  (BuildContext context) => new MainPage(),
+        '/start': (BuildContext context) => new TriningStart(),
         '/timer': (BuildContext context) => new ApproachTimer(),
       },
     );

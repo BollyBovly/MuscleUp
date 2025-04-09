@@ -19,7 +19,7 @@ class StartButton extends StatelessWidget{
         ],
       ),
       child: ElevatedButton(
-        onPressed: () => {Navigator.of(context).pushNamed('/timer')},
+        onPressed: () => {Navigator.of(context).pushNamed('/start')},
         style: ElevatedButton.styleFrom(
           backgroundColor: Color(0xFFFFFFFF),
           minimumSize: Size(100, 40),
