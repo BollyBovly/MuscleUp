@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:musleapp/design/colors.dart';
 
-class ApproachTimer extends StatelessWidget{
+class ApproachTimer extends StatelessWidget {
   const ApproachTimer({super.key});
 
   @override
@@ -10,20 +10,22 @@ class ApproachTimer extends StatelessWidget{
       appBar: AppBar(
         title: const Text('Название упражнения'),
         backgroundColor: backgroundColor,
-        leading: Align(alignment: Alignment.centerRight, child: Builder(
-          builder: (context){
-            return IconButton(
+        leading: Align(
+          alignment: Alignment.centerRight,
+          child: Builder(
+            builder: (context) {
+              return IconButton(
                 onPressed: () => Navigator.of(context).pop(),
                 icon: const Icon(Icons.arrow_back),
                 alignment: Alignment.center,
-            );
-          }
-        ),
+              );
+            },
+          ),
         ),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
-        height:  MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height,
         color: backgroundColor,
         child: Column(
           children: [
@@ -36,49 +38,34 @@ class ApproachTimer extends StatelessWidget{
                 decoration: BoxDecoration(
                   color: textButtonColor,
                   borderRadius: BorderRadius.circular(130),
-                  boxShadow: [
-                    BoxShadow(
-                      color: timerColor, // Shadow color with opacity
-                      spreadRadius: 2, // Spread value
-                      blurRadius: 10, // Blur value
-                      offset: Offset(0, 0), // Offset (horizontal, vertical)
-                    ),
-                  ],
                 ),
                 child: Align(
                   alignment: Alignment.center,
                   child: Text(
                     '3:37',
-                    style: TextStyle(
-                      fontSize: 90,
-                      color: circleColor
-                    ),
+                    style: TextStyle(fontSize: 90, color: circleColor),
                   ),
-                )
+                ),
               ),
             ),
             Container(
               margin: EdgeInsets.only(top: 60),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(35),
-                boxShadow: [
-                  BoxShadow(
-                    color: elevationColor, // Shadow color with opacity
-                    spreadRadius: 0.25, // Spread value
-                    blurRadius: 10, // Blur value
-                    offset: Offset(0, 0), // Offset (horizontal, vertical)
-                  ),
-                ],
               ),
               child: ElevatedButton(
                 onPressed: () => {print('timer started')},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFFFFFFFF),
-                  minimumSize: Size(MediaQuery.of(context).size.width - 150, MediaQuery.of(context).size.width - 300),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                  elevation: 0.0,
+                  minimumSize: Size(
+                    MediaQuery.of(context).size.width - 150,
+                    MediaQuery.of(context).size.width - 300,
                   ),
-                  elevation: 20,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(70),
+                    side: BorderSide(color: textButtonColor, width: 3),
+                  ),
                 ),
                 child: Text(
                   'Начать подход',
@@ -86,15 +73,14 @@ class ApproachTimer extends StatelessWidget{
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w400,
-                    color: textButtonColor
-                  )
-                ),  
+                    color: textButtonColor,
+                  ),
+                ),
               ),
             ),
           ],
-        )
+        ),
       ),
     );
   }
-  
 }
