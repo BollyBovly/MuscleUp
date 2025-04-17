@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:musleapp/design/colors.dart';
 
-class TriningStart extends StatelessWidget{
-  const TriningStart({super.key});
+class BreakPage extends StatelessWidget{
+  const BreakPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Название упражнения'),
+        title: const Text('Перерыв!'),
         backgroundColor: backgroundColor,
-        leading: Align(alignment: Alignment.centerRight, child: Builder(
+        leading: Align(alignment: Alignment.center, child: Builder(
           builder: (context){
             return IconButton(
                 onPressed: () => Navigator.of(context).pop(),
@@ -30,12 +30,12 @@ class TriningStart extends StatelessWidget{
             Align(
               alignment: Alignment.topCenter,
               child: Container(
-                margin: EdgeInsets.only(top: 40),
-                width: MediaQuery.of(context).size.width - 40,
-                height: MediaQuery.of(context).size.width - 130,
+                margin: EdgeInsets.only(top: 60),
+                width: MediaQuery.of(context).size.width - 100,
+                height: MediaQuery.of(context).size.width - 100,
                 decoration: BoxDecoration(
-                  color: interfaceColor,
-                  borderRadius: BorderRadius.circular(30),
+                  color: textButtonColor,
+                  borderRadius: BorderRadius.circular(130),
                   boxShadow: [
                     BoxShadow(
                       color: timerColor, // Shadow color with opacity
@@ -47,58 +47,43 @@ class TriningStart extends StatelessWidget{
                 ),
                 child: Align(
                   alignment: Alignment.center,
-                  child: Builder(
-                    builder: (context){
-                      return IconButton(
-                        onPressed: () => {print('video is playing!')},
-                        icon: const Icon(Icons.play_arrow),
-                        alignment: Alignment.center,
-                        iconSize: 60,
-                      );
-                    },
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 30),
+                        child: Text(
+                          'Так держать!',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: circleColor,
+                            fontWeight: FontWeight.w200
+                          ),
+                        )
+                      ),
+                      Text(
+                        '0:00',
+                        style: TextStyle(
+                          fontSize: 90,
+                          color: circleColor
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 0),
+                        child: Text(
+                          'Упражнение\nготово!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: circleColor,
+                            fontWeight: FontWeight.w200
+                          ),
+                        )
+                      ),
+                    ],
                   )
-                ),
+                )
                 
               ),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: MediaQuery.of(context).size.width - 70,
-                height: MediaQuery.of(context).size.width - 254,
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Container(
-                        margin: EdgeInsets.only(top: 40),
-                        child: Text(
-                          'Количество повторений: 15',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500
-                          ),
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Container(
-                        margin: EdgeInsets.only(top: 20),
-                        child: Text(
-                          'Количество подходов: 3',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                )
-              )
             ),
             Container(
               margin: EdgeInsets.only(top: 60),
@@ -114,7 +99,7 @@ class TriningStart extends StatelessWidget{
                 ],
               ),
               child: ElevatedButton(
-                onPressed: () => {Navigator.of(context).pushNamed('/timer')},
+                onPressed: () => {Navigator.of(context).pushNamed('/over')},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFFFFFFFF),
                   minimumSize: Size(MediaQuery.of(context).size.width - 150, MediaQuery.of(context).size.width - 300),
@@ -124,11 +109,11 @@ class TriningStart extends StatelessWidget{
                   elevation: 20,
                 ),
                 child: Text(
-                  'Начать подход',
+                  'Следующее\nупражнение',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w500,
                     color: textButtonColor
                   )
                 ),  
@@ -139,4 +124,8 @@ class TriningStart extends StatelessWidget{
       ),
     );
   }
+  
+   
+  
+  
 }
