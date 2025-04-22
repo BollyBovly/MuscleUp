@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:musleapp/design/colors.dart';
 
-class ApproachTimer extends StatelessWidget{
-  const ApproachTimer({super.key});
+class TrainingOver extends StatelessWidget{
+  const TrainingOver({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Название упражнения'),
+        title: const Text('Название тренировки'),
         backgroundColor: backgroundColor,
         leading: Align(alignment: Alignment.centerRight, child: Builder(
           builder: (context){
@@ -30,33 +30,24 @@ class ApproachTimer extends StatelessWidget{
             Align(
               alignment: Alignment.topCenter,
               child: Container(
-                margin: EdgeInsets.only(top: 60),
-                width: MediaQuery.of(context).size.width - 100,
-                height: MediaQuery.of(context).size.width - 100,
-                decoration: BoxDecoration(
-                  color: textButtonColor,
-                  borderRadius: BorderRadius.circular(130),
-                  boxShadow: [
-                    BoxShadow(
-                      color: timerColor, // Shadow color with opacity
-                      spreadRadius: 2, // Spread value
-                      blurRadius: 10, // Blur value
-                      offset: Offset(0, 0), // Offset (horizontal, vertical)
-                    ),
-                  ],
-                ),
+                margin: EdgeInsets.only(top: 40),
+                width: MediaQuery.of(context).size.width - 40,
+                height: MediaQuery.of(context).size.width - 40,
                 child: Align(
                   alignment: Alignment.center,
                   child: Text(
-                    '0:00',
+                    'Тренировка\nокончена!',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 90,
-                      color: circleColor
-                    ),
-                  ),
+                      fontSize: 40,
+                      fontWeight: FontWeight.w500,
+                      color: textButtonColor
+                    )
+                  )
                 )
               ),
             ),
+            
             Container(
               margin: EdgeInsets.only(top: 60),
               decoration: BoxDecoration(
@@ -71,7 +62,7 @@ class ApproachTimer extends StatelessWidget{
                 ],
               ),
               child: ElevatedButton(
-                onPressed: () => {Navigator.of(context).pushNamed('/break')},
+                onPressed: () => {Navigator.of(context).pushNamed('/home')},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFFFFFFFF),
                   minimumSize: Size(MediaQuery.of(context).size.width - 150, MediaQuery.of(context).size.width - 300),
@@ -81,7 +72,7 @@ class ApproachTimer extends StatelessWidget{
                   elevation: 20,
                 ),
                 child: Text(
-                  'Начать подход',
+                  'Отлично!',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24,
@@ -96,8 +87,4 @@ class ApproachTimer extends StatelessWidget{
       ),
     );
   }
-  
-   
-  
-  
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:musleapp/design/colors.dart';
 import 'package:musleapp/pages/approach_timer.dart';
+import 'package:musleapp/pages/break_page.dart';
 import 'package:musleapp/pages/main_page.dart';
-import 'package:musleapp/pages/trining_start.dart';
+import 'package:musleapp/pages/training_over.dart';
+import 'package:musleapp/pages/training_start.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,8 +25,10 @@ class MyApp extends StatelessWidget {
       home: const MainPage(),
       routes: <String, WidgetBuilder>{
         '/home':  (BuildContext context) => new MainPage(),
-        '/start': (BuildContext context) => new TriningStart(),
+        '/start': (BuildContext context) => new TrainingStart(),
         '/timer': (BuildContext context) => new ApproachTimer(),
+        '/break': (BuildContext context) => new BreakPage(),
+        '/over': (BuildContext context) => new TrainingOver(),
       },
     );
   }

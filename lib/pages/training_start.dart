@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:musleapp/design/colors.dart';
 
-class TriningStart extends StatelessWidget {
-  const TriningStart({super.key});
+class TrainingStart extends StatelessWidget{
+  const TrainingStart({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,22 +10,20 @@ class TriningStart extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Название упражнения'),
         backgroundColor: backgroundColor,
-        leading: Align(
-          alignment: Alignment.centerRight,
-          child: Builder(
-            builder: (context) {
-              return IconButton(
+        leading: Align(alignment: Alignment.centerRight, child: Builder(
+          builder: (context){
+            return IconButton(
                 onPressed: () => Navigator.of(context).pop(),
                 icon: const Icon(Icons.arrow_back),
                 alignment: Alignment.center,
-              );
-            },
-          ),
+            );
+          }
+        ),
         ),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        height:  MediaQuery.of(context).size.height,
         color: backgroundColor,
         child: Column(
           children: [
@@ -50,7 +48,7 @@ class TriningStart extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: Builder(
-                    builder: (context) {
+                    builder: (context){
                       return IconButton(
                         onPressed: () => {print('video is playing!')},
                         icon: const Icon(Icons.play_arrow),
@@ -58,8 +56,9 @@ class TriningStart extends StatelessWidget {
                         iconSize: 60,
                       );
                     },
-                  ),
+                  )
                 ),
+                
               ),
             ),
             Align(
@@ -78,7 +77,7 @@ class TriningStart extends StatelessWidget {
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w500
                           ),
                         ),
                       ),
@@ -92,33 +91,37 @@ class TriningStart extends StatelessWidget {
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w500
                           ),
                         ),
                       ),
-                    ),
+                    )
                   ],
-                ),
-              ),
+                )
+              )
             ),
             Container(
               margin: EdgeInsets.only(top: 60),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(35),
+                boxShadow: [
+                  BoxShadow(
+                    color: elevationColor, // Shadow color with opacity
+                    spreadRadius: 0.25, // Spread value
+                    blurRadius: 10, // Blur value
+                    offset: Offset(0, 0), // Offset (horizontal, vertical)
+                  ),
+                ],
               ),
               child: ElevatedButton(
                 onPressed: () => {Navigator.of(context).pushNamed('/timer')},
                 style: ElevatedButton.styleFrom(
-                  elevation: 0.0,
                   backgroundColor: Color(0xFFFFFFFF),
-                  minimumSize: Size(
-                    MediaQuery.of(context).size.width - 150,
-                    MediaQuery.of(context).size.width - 300,
-                  ),
+                  minimumSize: Size(MediaQuery.of(context).size.width - 150, MediaQuery.of(context).size.width - 300),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(70),
-                    side: BorderSide(color: textButtonColor, width: 3),
+                    borderRadius: BorderRadius.circular(10),
                   ),
+                  elevation: 20,
                 ),
                 child: Text(
                   'Начать подход',
@@ -126,13 +129,13 @@ class TriningStart extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w400,
-                    color: textButtonColor,
-                  ),
-                ),
+                    color: textButtonColor
+                  )
+                ),  
               ),
             ),
           ],
-        ),
+        )
       ),
     );
   }
