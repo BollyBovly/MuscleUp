@@ -23,7 +23,7 @@ class MainPage extends StatelessWidget {
         leading: Align(alignment: Alignment.centerRight, child: Builder(
           builder: (context){
             return IconButton(
-                onPressed: () => Scaffold.of(context).openDrawer(),
+                onPressed: () => Navigator.of(context).pushNamed('/stat'),
                 icon: const Icon(Icons.reorder),
                 alignment: Alignment.center,
             );
