@@ -1,0 +1,158 @@
+[
+    {
+        "id": "chest1",
+        "name": "Жим лежа",
+        "sets": 3,
+        "reps": 10,
+        "progress": [
+            {"date": "27-04-2025", "weight": 80}
+        ]
+    },
+    {
+        "id": "chest2",
+        "name": "Бабочка",
+        "sets": 3,
+        "reps": 10,
+        "progress": [
+            {"date": "27-04-2025", "weight": 40}
+        ]
+    },
+    {
+        "id": "chest3",
+        "name": "Жим штанги/гантелей в наклоне",
+        "sets": 3,
+        "reps": 8,
+        "progress": [
+            {"date": "27-04-2025", "weight": 30}
+        ]
+    },
+    {
+        "id": "chest4",
+        "name": "Жим в хамере",
+        "sets": 3,
+        "reps": 10,
+        "progress": [
+            {"date": "27-04-2025", "weight": 30}
+        ]
+    },
+    {
+        "id": "chest5",
+        "name": "Брусья",
+        "sets": 2,
+        "reps": 8,
+        "progress": [
+            {"date": "27-04-2025", "weight": 30}
+        ]
+    },
+    
+    {
+        "id": "back1",
+        "name": "Тяга верхнего блока",
+        "sets": 3,
+        "reps": 10,
+        "progress": [
+            {"date": "27-04-2025", "weight": 40},
+            {"date": "30-04-2025", "weight": 80},
+            {"date": "1-05-2025", "weight": 90}
+        ]
+    },
+    {
+        "id": "back2",
+        "name": "Пулловер",
+        "sets": 3,
+        "reps": 10,
+        "progress": [
+            {"date": "27-04-2025", "weight": 40}
+        ]
+    },
+    {
+        "id": "back3",
+        "name": "Тяга нижнего блока к поясу",
+        "sets": 3,
+        "reps": 10,
+        "progress": [
+            {"date": "27-04-2025", "weight": 40}
+        ]
+    },
+    {
+        "id": "back4",
+        "name": "Тяга гантелей с упором в скамью",
+        "sets": 3,
+        "reps": 10,
+        "progress": [
+            {"date": "27-04-2025", "weight": 40}
+        ]
+    },
+    {
+        "id": "back5",
+        "name": "Подтягивания",
+        "sets": 3,
+        "reps": " до отказа",
+        "progress": [
+            {"date": "27-04-2025", "weight": 40}
+        ]
+    },
+    {
+        "id": "arms1",
+        "name": "Сгибание рук со штангой/гантелями",
+        "sets": 3,
+        "reps": 8,
+        "progress": [
+            {"date": "27-04-2025", "weight": 30}
+        ]
+    },
+    {
+        "id": "arms2",
+        "name": "Tricep Pushdown",
+        "sets": 3,
+        "reps": 8,
+        "progress": [
+            {"date": "27-04-2025", "weight": 30}
+        ]
+    },
+    {
+        "id": "arms3",
+        "name": "Махи с гантелями в сторону",
+        "sets": 3,
+        "reps": 10,
+        "progress": [
+            {"date": "27-04-2025", "weight": 30}
+        ]
+    },
+    {
+        "id": "legs1",
+        "name": "Присед/гак-присед",
+        "sets": 3,
+        "reps": 10,
+        "progress": [
+            {"date": "27-04-2025", "weight": 30}
+        ]
+    },
+    {
+        "id": "legs2",
+        "name": "Разгибание ног в тренажере",
+        "sets": 3,
+        "reps": 10,
+        "progress": [
+            {"date": "27-04-2025", "weight": 30}
+        ]
+    },
+    {
+        "id": "legs3",
+        "name": "Румынская тяга с гантелями/штангой",
+        "sets": 3,
+        "reps": 10,
+        "progress": [
+            {"date": "27-04-2025", "weight": 30}
+        ]
+    },
+    {
+        "id": "legs4",
+        "name": "Сгибание ног в тренажере",
+        "sets": 3,
+        "reps": 10,
+        "progress": [
+            {"date": "27-04-2025", "weight": 30}
+        ]
+    }
+]
