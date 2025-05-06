@@ -16,7 +16,7 @@ class LocalDataService {
     final file = await _getLocalFile();
     if (!(await file.exists())) {
       final jsonString = await rootBundle.loadString(
-        'assets/data/exercises.json',
+        'lib/assets/data/exercise.json',
       );
       await file.writeAsString(jsonString);
     }

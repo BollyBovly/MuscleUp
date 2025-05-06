@@ -7,7 +7,7 @@ class CircleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(alignment: Alignment.centerLeft, child: Container(
-      width: MediaQuery.of(context).size.width - 55,  // Ширина контейнера
+      width: MediaQuery.of(context).size.width - 52 * (7 - DateTime.now().weekday),  // Ширина контейнера
       height: 25,  // Высота контейнера
       decoration: BoxDecoration(
         color: textButtonColor, // Фоновый цвет полосы
@@ -33,7 +33,7 @@ class CircleWidget extends StatelessWidget {
             height: 20,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: textButtonColor, // Цвет последнего круга
+              color: circleColor, // Цвет последнего круга
             ),
           ),
         )

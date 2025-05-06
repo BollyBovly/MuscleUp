@@ -11,10 +11,12 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    List<String> days = ['Понедельник', "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресение"];
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "1-я неделя, Суббота",
+        title: Text(
+          "${now.day}.${now.month}.${now.year},  ${days[now.weekday - 1]}",
           style: TextStyle(
             fontWeight: FontWeight.w500,
           ),
@@ -41,7 +43,7 @@ class MainPage extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(bottom: 10),
               child: Text(
-                'Название тренировки',
+                'Фуллбади(Fullbody)',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20,
