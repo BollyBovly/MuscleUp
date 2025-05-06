@@ -2,7 +2,7 @@ class Exercise {
   final String id;
   final String name;
   final int sets;
-  final int reps;
+  final String reps;
   final List<ProgressEntry> progress;
 
   Exercise({
@@ -21,10 +21,7 @@ class Exercise {
           json['sets'] is int
               ? json['sets']
               : int.parse(json['sets'].toString()),
-      reps:
-          json['reps'] is int
-              ? json['reps']
-              : int.parse(json['reps'].toString()),
+      reps: json['reps'].toString(),
       progress:
           (json['progress'] as List<dynamic>)
               .map((entry) => ProgressEntry.fromJson(entry))

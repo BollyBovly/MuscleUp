@@ -1,7 +1,7 @@
 class Exercise {
   String name;
   int sets;
-  int reps;
+  String reps;
   List<ProgressEntry> progress;
 
   Exercise({
@@ -15,10 +15,11 @@ class Exercise {
     return Exercise(
       name: json['name'],
       sets: json['sets'],
-      reps: json['reps'],
-      progress: (json['progress'] as List<dynamic>)
-          .map((item) => ProgressEntry.fromJson(item))
-          .toList(),
+      reps: json['reps'].toString(),
+      progress:
+          (json['progress'] as List<dynamic>)
+              .map((item) => ProgressEntry.fromJson(item))
+              .toList(),
     );
   }
 
@@ -46,9 +47,6 @@ class ProgressEntry {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'date': date,
-      'weight': weight,
-    };
+    return {'date': date, 'weight': weight};
   }
 }
