@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart';
+import 'package:musleapp/models/exercise_parsing.dart';
 import 'package:path_provider/path_provider.dart';
-import '../models/exercise.dart';
+
 
 class LocalDataService {
   static const _fileName = 'exercises.json';

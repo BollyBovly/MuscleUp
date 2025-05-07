@@ -1,47 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:musleapp/services/local_data_service.dart';
+import 'package:musleapp/api/api_server.dart';
 
 
-class AddProgressScreen extends StatefulWidget {
+class ExerciseWidget extends StatefulWidget {
   @override
-  _AddProgressScreenState createState() => _AddProgressScreenState();
+  _ExerciseWidgetState createState() => _ExerciseWidgetState();
 }
 
-class _AddProgressScreenState extends State<AddProgressScreen> {
-  final TextEditingController _weightController = TextEditingController();
-  final LocalDataService _dataService = LocalDataService();
+class _ExerciseWidgetState extends State<ExerciseWidget> {
+  Future<List<dynamic>>? exercises;
 
-  void _addProgress() async {
-    final double newWeight = double.tryParse(_weightController.text) ?? 0;
-    if (newWeight > 0) {
-      await _dataService.addProgressToExercise(0, newWeight); // Добавление в первый элемент для примера
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Progress added')));
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Invalid weight')));
-    }
+  @override
+  void initState() {
+    super.initState();
+    exercises = ApiService.getExercises();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Add Progress')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _weightController,
-              decoration: InputDecoration(labelText: 'Enter weight'),
-              keyboardType: TextInputType.number,
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _addProgress,
-              child: Text('Add Progress'),
-            ),
-          ],
-        ),
+      appBar: AppBar(
+        title: Text('Упражнения'),
+      ),
+      body: FutureBuilder<List<dynamic>>(
+        future: exercises,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Ошибка: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('Нет доступных упражнений'));
+          } else {
+            final firstExercise = snapshot.data![0];
+            final exerciseName = firstExercise['progress'] ?? 'Имя не найдено';
+
+            return Center(
+              child: Text(
+                'Первое упражнение: $exerciseName',
+                style: TextStyle(fontSize: 20),
+              ),
+            );
+          }
+        },
       ),
     );
   }
 }
+

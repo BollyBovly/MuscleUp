@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         '/break': (BuildContext context) => new BreakPage(),
         '/over': (BuildContext context) => new TrainingOver(),
         '/stat': (BuildContext context) => new StatisticsScreen(),
-        '/test': (BuildContext context) => new AddProgressScreen(),
+        '/test': (BuildContext context) => new ExerciseWidget(),
       },
     );
   }

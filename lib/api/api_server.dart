@@ -11,10 +11,10 @@ class ProgressEntry {
 }
 
 class ApiService {
-  static const String baseUrl = 'https://78d3-62-76-239-184.ngrok-free.app/api';
+  static const String baseUrl = 'https://disclose-collective-detail-reduction.trycloudflare.com/api';
 
   static Future<List<dynamic>> getExercises() async {
-    final response = await http.get(Uri.parse('$baseUrl/exercises'));
+    final response = await http.get(Uri.parse('$baseUrl/Exercises'));
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
