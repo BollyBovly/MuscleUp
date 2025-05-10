@@ -11,7 +11,7 @@ class ProgressEntry {
 }
 
 class ApiService {
-  static const String baseUrl = 'https://disclose-collective-detail-reduction.trycloudflare.com/api';
+  static const String baseUrl = 'https://ab-beat-screensavers-viewer.trycloudflare.com/api';
 
   static Future<List<dynamic>> getExercises() async {
     final response = await http.get(Uri.parse('$baseUrl/Exercises'));

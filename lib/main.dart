@@ -4,7 +4,6 @@ import 'package:musleapp/pages/approach_timer.dart';
 import 'package:musleapp/pages/break_page.dart';
 import 'package:musleapp/pages/main_page.dart';
 import 'package:musleapp/pages/statistics_screen.dart';
-import 'package:musleapp/pages/test.dart';
 import 'package:musleapp/pages/training_over.dart';
 import 'package:musleapp/pages/training_start.dart';
 
@@ -32,7 +31,6 @@ class MyApp extends StatelessWidget {
         '/break': (BuildContext context) => new BreakPage(),
         '/over': (BuildContext context) => new TrainingOver(),
         '/stat': (BuildContext context) => new StatisticsScreen(),
-        '/test': (BuildContext context) => new ExerciseWidget(),
       },
     );
   }
