@@ -12,7 +12,7 @@ class ProgressEntry {
 
 class ApiService {
   static const String baseUrl =
-      'https://ab-beat-screensavers-viewer.trycloudflare.com/api';
+      'https://network-bracelets-ac-rochester.trycloudflare.com/api';
 
   static Future<List<dynamic>> getExercises() async {
     final response = await http.get(Uri.parse('$baseUrl/Exercises'));
@@ -54,7 +54,7 @@ class ApiService {
     );
 
     if (response.statusCode != 200) {
-      throw Exception('Ошибка при добавлении веса пользователя');
+      throw Exception('Ошибка ${response.statusCode} при добавлении веса пользователя');
     }
   }
 }
