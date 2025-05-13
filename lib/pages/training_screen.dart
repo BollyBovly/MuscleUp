@@ -124,7 +124,7 @@ class TrainingScreen extends StatelessWidget{
                 elevation: 20,
               ),
               child: Text(
-                'Начать подход',
+                'Отдых между подходами',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,

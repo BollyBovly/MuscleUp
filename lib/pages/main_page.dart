@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:musleapp/design/colors.dart';
-import 'package:musleapp/pages/dishes_menu.dart';
+//import 'package:musleapp/pages/dishes_menu.dart';
 import 'package:musleapp/pages/start_button.dart';
 import 'package:musleapp/pages/training_description.dart';
 import 'package:musleapp/pages/week_bar.dart';
+import 'package:musleapp/pages/weight_widget.dart';
 
 
 class MainPage extends StatelessWidget {
@@ -26,7 +27,7 @@ class MainPage extends StatelessWidget {
           builder: (context){
             return IconButton(
                 onPressed: () => Navigator.of(context).pushNamed('/stat'),
-                icon: const Icon(Icons.reorder),
+                icon: const Icon(Icons.show_chart),
                 alignment: Alignment.center,
             );
           }
@@ -70,7 +71,8 @@ class MainPage extends StatelessWidget {
             ),
             TrainingDescription(),
             StartButton(),
-            DishesMenu(),
+            //DishesMenu(),
+            WeightInputWidget(),
           ]
         )
       ),

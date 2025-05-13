@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:musleapp/api/api_server.dart';
 import 'package:musleapp/design/colors.dart';
 import 'package:musleapp/pages/training_screen.dart';
+import 'package:musleapp/services/training_controller.dart';
 
 class TrainingStart extends StatefulWidget{
   const TrainingStart({super.key});
@@ -19,6 +20,7 @@ class TrainingStartState extends State<TrainingStart>{
   @override
   void initState() {
     super.initState();
+    
     exercises = ApiService.getExercises();
   }
 
@@ -54,7 +56,7 @@ class TrainingStartState extends State<TrainingStart>{
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return Center(child: Text('No exercises available'));
           } else {
-            final exercise = snapshot.data![0];
+            final exercise = snapshot.data![TrainingController.ex_index];
             return TrainingScreen(
               reps: exercise['reps'],
               sets: exercise['sets'],
