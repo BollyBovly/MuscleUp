@@ -12,7 +12,7 @@ class ProgressEntry {
 
 class ApiService {
   static const String baseUrl =
-      'https://ab-beat-screensavers-viewer.trycloudflare.com/api';
+      'https://fares-helping-contains-dl.trycloudflare.com/api';
 
   static Future<List<dynamic>> getExercises() async {
     final response = await http.get(Uri.parse('$baseUrl/Exercises'));
@@ -20,7 +20,7 @@ class ApiService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Ошибка при загрузке упражнений');
+      throw Exception('Ошибка ${response.statusCode} при загрузке упражнений');
     }
   }
 
@@ -32,7 +32,7 @@ class ApiService {
     );
 
     if (response.statusCode != 200) {
-      throw Exception('Ошибка при добавлении прогресса');
+      throw Exception('Ошибка ${response.statusCode} при добавлении прогресса');
     }
   }
 
@@ -42,7 +42,7 @@ class ApiService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Ошибка при получении веса пользователя');
+      throw Exception('Ошибка ${response.statusCode} при получении веса пользователя');
     }
   }
 
@@ -54,7 +54,7 @@ class ApiService {
     );
 
     if (response.statusCode != 200) {
-      throw Exception('Ошибка при добавлении веса пользователя');
+      throw Exception('Ошибка ${response.statusCode} при добавлении веса пользователя');
     }
   }
 }

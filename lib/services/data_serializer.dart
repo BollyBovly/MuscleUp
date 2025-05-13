@@ -5,8 +5,11 @@ class DataSerializer{
   static List<ChartData> serialize(List<dynamic> progress){
     List<ChartData> prog = [];
 
-    for (final progItem in progress){
-      prog.add(ChartData(progItem['date'], progItem['weight']));
+    for (final progr in progress){
+      //prog.add(ChartData(progItem['progress']['date'], progItem['progress']['weight']));
+      for (final progItem in progr['progress']){
+        prog.add(ChartData(progItem['date'], progItem['weight']));
+      }
     }
 
     return prog;

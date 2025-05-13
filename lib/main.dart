@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const MainPage(),
       routes: <String, WidgetBuilder>{
-        '/home': (BuildContext context) => new MainPage(),
+        '/home': (BuildContext context) => new MainPage(), 
         '/start': (BuildContext context) => new TrainingStart(),
         '/timer': (BuildContext context) => new ApproachTimer(),
         '/break': (BuildContext context) => new BreakPage(),
