@@ -72,7 +72,7 @@ class MainPage extends StatelessWidget {
             TrainingDescription(),
             StartButton(),
             //DishesMenu(),
-            WeightInputWidget(),
+            WeightInputWidget(task: 'self-weight'),
           ]
         )
       ),

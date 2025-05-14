@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:musleapp/design/colors.dart';
+import 'package:musleapp/pages/weight_widget.dart';
+
 
 class TrainingScreen extends StatelessWidget{
   final int reps;
@@ -32,32 +34,20 @@ class TrainingScreen extends StatelessWidget{
             child: Container(
               margin: EdgeInsets.only(top: 40),
               width: MediaQuery.of(context).size.width - 40,
-              height: MediaQuery.of(context).size.width - 130,
+              height: MediaQuery.of(context).size.width - 160,
               decoration: BoxDecoration(
-                color: interfaceColor,
+                // color: interfaceColor,
                 borderRadius: BorderRadius.circular(30),
-                boxShadow: [
-                  BoxShadow(
-                    color: timerColor, // Shadow color with opacity
-                    spreadRadius: 2, // Spread value
-                    blurRadius: 10, // Blur value
-                    offset: Offset(0, 0), // Offset (horizontal, vertical)
-                  ),
-                ],
+                // boxShadow: [
+                //   BoxShadow(
+                //     color: timerColor, // Shadow color with opacity
+                //     spreadRadius: 2, // Spread value
+                //     blurRadius: 10, // Blur value
+                //     offset: Offset(0, 0), // Offset (horizontal, vertical)
+                //   ),
+                // ],
               ),
-              child: Align(
-                alignment: Alignment.center,
-                child: Builder(
-                  builder: (context){
-                    return IconButton(
-                      onPressed: () => {print('video is playing!')},
-                      icon: const Icon(Icons.play_arrow),
-                      alignment: Alignment.center,
-                      iconSize: 60,
-                    );
-                  },
-                )
-              ),
+              child: Image.asset('lib\\assets\\gifs\\$name.gif')
               
             ),
           ),
@@ -85,7 +75,7 @@ class TrainingScreen extends StatelessWidget{
                   Align(
                     alignment: Alignment.topLeft,
                     child: Container(
-                      margin: EdgeInsets.only(top: 20),
+                      margin: EdgeInsets.only(top: 10),
                       child: Text(
                         'Количество подходов: $sets',
                         textAlign: TextAlign.left,
@@ -101,7 +91,7 @@ class TrainingScreen extends StatelessWidget{
             )
           ),
           Container(
-            margin: EdgeInsets.only(top: 60),
+            margin: EdgeInsets.only(top: 20, bottom: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(35),
               boxShadow: [
@@ -117,14 +107,14 @@ class TrainingScreen extends StatelessWidget{
               onPressed: () => {Navigator.of(context).pushNamed('/timer')},
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFFFFFF),
-                minimumSize: Size(MediaQuery.of(context).size.width - 150, MediaQuery.of(context).size.width - 300),
+                minimumSize: Size(MediaQuery.of(context).size.width - 180, MediaQuery.of(context).size.width - 310),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                elevation: 20,
+                elevation: 5,
               ),
               child: Text(
-                'Отдых между подходами',
+                'Отдых',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,
@@ -134,6 +124,7 @@ class TrainingScreen extends StatelessWidget{
               ),  
             ),
           ),
+          WeightInputWidget(task: 'ex-weight'),
         ],
       )
     );

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:musleapp/api/api_server.dart';
 import 'package:musleapp/design/colors.dart';
+import 'package:musleapp/services/training_controller.dart';
 
 class WeightInputWidget extends StatefulWidget {
-  const WeightInputWidget({super.key});
+  final String task;
+
+  const WeightInputWidget({super.key, required this.task});
 
   @override
   State<StatefulWidget> createState() {
@@ -32,6 +35,7 @@ class _WeightInputWidgetState extends State<WeightInputWidget> {
 
   @override
   Widget build(BuildContext context) {
+    int? weight;
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(top: 20.0),
@@ -62,7 +66,25 @@ class _WeightInputWidgetState extends State<WeightInputWidget> {
             ),
             SizedBox(height: 30), // Отступ между полем ввода и кнопкой
             ElevatedButton(
-              onPressed: () => {_submitWeight}, //временное решение, потом нужно вернуть /start
+              onPressed: () => {
+                if (widget.task == 'self-weight'){
+                  _submitWeight()
+                }
+                else if (widget.task == 'ex-weight'){
+                  weight = int.tryParse(_weightController.text),
+    
+                  if (weight != null) {
+                    // Вызываем метод ApiService.addUser BodyWeight с введенным весом
+                    ApiService.addProgress(TrainingController.ex_index + 1, weight!),
+                    _weightController.clear()
+                  } else {
+                    // Обработка ошибки, если введенное значение не является числом
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Пожалуйста, введите корректный вес.')),
+                    )
+                  }
+                }
+              }, //временное решение, потом нужно вернуть /start
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFFFFFF),
                 minimumSize: Size(100, 50),
