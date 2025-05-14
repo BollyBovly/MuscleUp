@@ -68,7 +68,7 @@ class StatisticsScreenState extends State<StatisticsScreen>{
                         primaryXAxis: CategoryAxis(),
                         series: <CartesianSeries>[
                           LineSeries<ChartData, String>(
-                            dataSource: DataSerializer.serialize(weightList),
+                            dataSource: DataSerializer.serialize(weightList[0]['progress']),
                             xValueMapper: (ChartData data, _) => data.x,
                             yValueMapper: (ChartData data, _) => data.y
                           )

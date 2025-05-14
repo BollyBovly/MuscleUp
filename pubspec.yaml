@@ -38,6 +38,7 @@ dependencies:
   http: ^1.2.0
   dio: ^5.8.0+1
   path_provider: ^2.1.5
+  gif: ^2.3.0
 
 
 dev_dependencies:
@@ -63,6 +64,12 @@ flutter:
 
   assets:
     - lib/assets/data/exercise.json
+    - lib\assets\gifs\Жим лежа.gif
+    - lib\assets\gifs\Бабочка.gif
+    - lib\assets\gifs\Тяга верхнего блока.gif
+    - lib\assets\gifs\Пулловер.gif
+    - lib\assets\gifs\Присед-гак-присед.gif
+    - lib\assets\gifs\Разгибание ног в тренажере.gif
 
   # To add assets to your application, add an assets section, like this:
   # assets:

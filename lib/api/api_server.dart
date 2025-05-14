@@ -12,7 +12,7 @@ class ProgressEntry {
 
 class ApiService {
   static const String baseUrl =
-      'https://fares-helping-contains-dl.trycloudflare.com/api';
+      'https://notification-ham-printing-mine.trycloudflare.com/api';
 
   static Future<List<dynamic>> getExercises() async {
     final response = await http.get(Uri.parse('$baseUrl/Exercises'));
