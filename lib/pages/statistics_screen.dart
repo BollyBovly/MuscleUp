@@ -70,7 +70,8 @@ class StatisticsScreenState extends State<StatisticsScreen>{
                           LineSeries<ChartData, String>(
                             dataSource: DataSerializer.serialize(weightList[0]['progress']),
                             xValueMapper: (ChartData data, _) => data.x,
-                            yValueMapper: (ChartData data, _) => data.y
+                            yValueMapper: (ChartData data, _) => data.y,
+                            color: Colors.red,
                           )
                         ]
                       )
