@@ -7,7 +7,7 @@ class DishesMenu extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 20),
+      margin: EdgeInsets.only(top: 0),
       width: MediaQuery.of(context).size.width - 60,
       height: 330,
       child: Column(
@@ -39,15 +39,9 @@ class DishesMenu extends StatelessWidget{
                       height: 80,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        color: const Color.fromARGB(255, 239, 237, 237),
+                        
                       ),
-                      child: Text(
-                        'Тут есть картинка',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 14
-                        ),
-                      ),
+                      child: Image.asset('lib\\assets\\food\\Овсянка с греческим йогуртом и бананом.jpg'),
                     )
                   ),
                   Align(
@@ -60,7 +54,7 @@ class DishesMenu extends StatelessWidget{
                         //color: weekBarColor,
                       ),
                       child: Text(
-                        'Пицца паста пепперони \nВремя готовки: 40 мин.\nСложность: 2/5',
+                        'Овсянка с греческим йогуртом и бананом \nВремя готовки: 10 мин.',
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontSize: 14
@@ -95,15 +89,9 @@ class DishesMenu extends StatelessWidget{
                       height: 80,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        color: const Color.fromARGB(255, 239, 237, 237),
+                        
                       ),
-                      child: Text(
-                        'Тут есть картинка',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 14
-                        ),
-                      ),
+                      child: Image.asset('lib\\assets\\food\\Рис с курицей и салат айсберг.jpg'),
                     )
                   ),
                   Align(
@@ -116,7 +104,7 @@ class DishesMenu extends StatelessWidget{
                         //color: weekBarColor,
                       ),
                       child: Text(
-                        'Пицца паста пепперони \nВремя готовки: 40 мин.\nСложность: 2/5',
+                        'Рис с курицей и салат айсберг \nВремя готовки: 40 мин.',
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontSize: 14
@@ -151,15 +139,9 @@ class DishesMenu extends StatelessWidget{
                       height: 80,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        color: const Color.fromARGB(255, 239, 237, 237),
+                        
                       ),
-                      child: Text(
-                        'Тут есть картинка',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 14
-                        ),
-                      ),
+                      child: Image.asset('lib\\assets\\food\\Творог с ягодами или орехами.jpg'),
                     )
                   ),
                   Align(
@@ -172,7 +154,7 @@ class DishesMenu extends StatelessWidget{
                         //color: weekBarColor,
                       ),
                       child: Text(
-                        'Пицца паста пепперони \nВремя готовки: 40 мин.\nСложность: 2/5',
+                        'Творог с ягодами или орехами \nВремя готовки: 10 мин.',
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontSize: 14

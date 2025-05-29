@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musleapp/design/colors.dart';
+import 'package:musleapp/pages/dishes_menu.dart';
 
 class TrainingOver extends StatelessWidget{
   const TrainingOver({super.key});
@@ -8,7 +9,7 @@ class TrainingOver extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Название тренировки'),
+        title: const Text('Тренировка окончена!'),
         backgroundColor: backgroundColor,
         leading: Align(alignment: Alignment.centerRight, child: Builder(
           builder: (context){
@@ -30,26 +31,30 @@ class TrainingOver extends StatelessWidget{
             Align(
               alignment: Alignment.topCenter,
               child: Container(
-                margin: EdgeInsets.only(top: 40),
+                margin: EdgeInsets.only(bottom: 10),
                 width: MediaQuery.of(context).size.width - 40,
-                height: MediaQuery.of(context).size.width - 40,
+                height: MediaQuery.of(context).size.width - 180,
                 child: Align(
                   alignment: Alignment.center,
                   child: Text(
-                    'Тренировка\nокончена!',
+                    'Теперь можно и подкрепиться! \nВот варианты:',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 40,
+                      fontSize: 28,
                       fontWeight: FontWeight.w500,
-                      color: textButtonColor
+                      color: textButtonColor,
+                       
                     )
                   )
                 )
               ),
             ),
-            
+            Align(
+              alignment: Alignment.center,
+              child: DishesMenu(),
+            ),
             Container(
-              margin: EdgeInsets.only(top: 60),
+              margin: EdgeInsets.only(top: 40),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(35),
                 boxShadow: [

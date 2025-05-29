@@ -45,7 +45,7 @@ class _WeightInputWidgetState extends State<WeightInputWidget> {
             Center( // Центрируем текст
              
               child: Text(
-                'Не забывай отслеживать свой вес!',
+                widget.task == 'ex-weight' ? 'Отмечай прогресс в упражнении' : 'Не забывай отслеживать свой вес!',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold), // Стиль текста
                 textAlign: TextAlign.center, // Выравнивание текста по центру
               ),
@@ -57,7 +57,7 @@ class _WeightInputWidgetState extends State<WeightInputWidget> {
                 controller: _weightController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: 'Введите ваш вес (кг)',
+                  labelText: 'Введите вес (кг)',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0), // Скругленные углы
                   ),
