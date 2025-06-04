@@ -37,7 +37,7 @@ class _ChartWidgetState extends State<ChartWidget> {
     "Сгибание рук со штангой/гантелями",
     "Tricep Pushdown"
   ];
-  String chart_title = 'Вес';
+  String chart_title = '';
   List<ChartData> data = [
     ChartData('1-я неделя', 0),
     ChartData('2-я неделя', 0),
@@ -48,10 +48,16 @@ class _ChartWidgetState extends State<ChartWidget> {
     ChartData('7-я неделя', 0),
   ];
 
+  late SelectionBehavior _selectionBehavior;
+
   @override
   void initState() {
     super.initState();
     exercises = ApiService.getExercises(); // Загружаем упражнения при инициализации
+    _selectionBehavior = SelectionBehavior(
+      enable: true,
+      selectedColor: const Color.fromARGB(255, 134, 10, 10), // цвет выбранной точки
+    );
   }
 
   void UpdateTitle(int _title) {
@@ -161,13 +167,59 @@ class _ChartWidgetState extends State<ChartWidget> {
               margin: EdgeInsets.only(top: 20),
               child: SfCartesianChart(
                 title: ChartTitle(text: chart_title),
+                tooltipBehavior: TooltipBehavior(
+                  enable: true,
+                  builder: (dynamic data, dynamic point, dynamic series, int pointIndex, int seriesIndex) {
+                    final ChartData item = data as ChartData;
+
+                    return Container(
+                      width: 160,
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 204),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(Icons.calendar_today, color: Colors.white, size: 14),
+                              const SizedBox(width: 6),
+                              Text('Дата: ${item.x}', style: TextStyle(color: Colors.white)),
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          Row(
+                            children: [
+                              Icon(Icons.fitness_center, color: Colors.white, size: 14),
+                              const SizedBox(width: 6),
+                              Text('Вес: ${item.y} кг', style: TextStyle(color: Colors.white)),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
                 primaryXAxis: CategoryAxis(),
                 series: <CartesianSeries>[
                   LineSeries<ChartData, String>(
+                    name: '',
                     dataSource: data,
                     xValueMapper: (ChartData data, _) => data.x,
                     yValueMapper: (ChartData data, _) => data.y,
                     color: Colors.red,
+                    enableTooltip: true,
+                    selectionBehavior: _selectionBehavior,
+                    markerSettings: MarkerSettings(
+                      isVisible: true,
+                      width: 6,  // обычный размер точки
+                      height: 6,
+                      borderWidth: 2,
+                      shape: DataMarkerType.circle,
+                    ),
                   ),
                 ],
               ),
