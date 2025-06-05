@@ -15,12 +15,19 @@ class StatisticsScreen extends StatefulWidget{
 
 class StatisticsScreenState extends State<StatisticsScreen>{
   Future<List<dynamic>>? weight;
+   late SelectionBehavior _selectionBehavior;
+   
 
   @override
   void initState() {
     super.initState();
     //ApiService.addUserBodyWeight(90); 
     weight = ApiService.getUserBodyWeight(); 
+    _selectionBehavior = SelectionBehavior(
+      enable: true,
+      selectedColor: const Color.fromARGB(255, 134, 10, 10), // цвет выбранной точки
+    );
+    
   }
 
   @override
@@ -66,12 +73,59 @@ class StatisticsScreenState extends State<StatisticsScreen>{
                       child: SfCartesianChart(
                         title: ChartTitle(text: 'Вес'),
                         primaryXAxis: CategoryAxis(),
+                        tooltipBehavior: TooltipBehavior(
+                          enable: true,
+                          builder: (dynamic data, dynamic point, dynamic series, int pointIndex, int seriesIndex) {
+                            final ChartData item = data as ChartData;
+
+                            return Container(
+                              width: 160,
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              decoration: BoxDecoration(
+                                color: Colors.black.withValues(alpha: 204),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(Icons.calendar_today, color: Colors.white, size: 14),
+                                      const SizedBox(width: 6),
+                                      Text('Дата: ${item.x}', style: TextStyle(color: Colors.white)),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Row(
+                                    children: [
+                                      Icon(Icons.balance, color: Colors.white, size: 14),
+                                      const SizedBox(width: 6),
+                                      Text('Вес: ${item.y} кг', style: TextStyle(color: Colors.white)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                        
                         series: <CartesianSeries>[
                           LineSeries<ChartData, String>(
+                            name: '',
                             dataSource: DataSerializer.serialize(weightList[0]['progress']),
                             xValueMapper: (ChartData data, _) => data.x,
                             yValueMapper: (ChartData data, _) => data.y,
                             color: Colors.red,
+                            enableTooltip: true,
+                            selectionBehavior: _selectionBehavior,
+                            markerSettings: MarkerSettings(
+                              isVisible: true,
+                              width: 6,  // обычный размер точки
+                              height: 6,
+                              borderWidth: 2,
+                              shape: DataMarkerType.circle,
+                            ),
                           )
                         ]
                       )
@@ -85,45 +139,6 @@ class StatisticsScreenState extends State<StatisticsScreen>{
           }
         }
       )
-
-      //   Container(
-      //   width: MediaQuery.of(context).size.width,
-      //   height: MediaQuery.of(context).size.height,
-      //   child: Column(
-      //     children: [
-      //       Align(
-      //         alignment: Alignment.center,
-      //         child: 
-      //         Container(
-      //           width: MediaQuery.of(context).size.width,
-      //           height: 250,
-      //           child: SfCartesianChart(
-      //             title: ChartTitle(text: 'Вес'),
-      //             primaryXAxis: CategoryAxis(),
-      //             series: <CartesianSeries>[
-      //               LineSeries<ChartData, String>(
-      //                 dataSource: [
-      //                     // Bind data source
-      //                     ChartData('1-я неделя', 90),
-      //                     ChartData('2-я неделя', 90),
-      //                     ChartData('3-я неделя', 89),
-      //                     ChartData('4-я неделя', 90),
-      //                     ChartData('5-я неделя', 90),
-      //                     ChartData('6-я неделя', 91),
-      //                     ChartData('7-я неделя', 92),
-      //                 ],
-      //                 xValueMapper: (ChartData data, _) => data.x,
-      //                 yValueMapper: (ChartData data, _) => data.y
-      //               )
-      //             ]
-      //           )
-      //         )
-      //       ),
-      //       ChartWidget()
-      //     ],
-      //   )
-        
-      // )
     );
   }
   
