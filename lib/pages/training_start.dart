@@ -15,7 +15,7 @@ class TrainingStart extends StatefulWidget{
 
 class TrainingStartState extends State<TrainingStart>{
 
-  Future<List<dynamic>>? exercises;
+  Future<Map<String,dynamic>>? exercises;
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class TrainingStartState extends State<TrainingStart>{
         title: const Text(
           'Упражнение',
           style: TextStyle(
-            fontWeight: FontWeight.w300
+            fontWeight: FontWeight.w500
           ),
         ),
         backgroundColor: backgroundColor,
@@ -56,11 +56,12 @@ class TrainingStartState extends State<TrainingStart>{
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return Center(child: Text('No exercises available'));
           } else {
-            final exercise = snapshot.data![TrainingController.ex_index];
+            final exercise = snapshot.data!["\$values"][TrainingController.ex_index];
             return TrainingScreen(
               reps: exercise['reps'],
               sets: exercise['sets'],
               name: exercise['name'],
+              gif_url: exercise['gifUrl'],
             );
           }
         }

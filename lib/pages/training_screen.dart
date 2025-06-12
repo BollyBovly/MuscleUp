@@ -7,7 +7,8 @@ class TrainingScreen extends StatelessWidget{
   final int reps;
   final int sets;
   final String name;
-  const TrainingScreen({super.key, required this.reps, required this.sets, required this.name});
+  final String gif_url;
+  const TrainingScreen({super.key, required this.reps, required this.sets, required this.name, required this.gif_url});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class TrainingScreen extends StatelessWidget{
                 //   ),
                 // ],
               ),
-              child: Image.asset('lib\\assets\\gifs\\$name.gif')
+              child: Image.network(gif_url)
               
             ),
           ),
@@ -118,7 +119,7 @@ class TrainingScreen extends StatelessWidget{
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w500,
                   color: textButtonColor
                 )
               ),  
