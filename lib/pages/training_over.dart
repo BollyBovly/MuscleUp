@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:musleapp/design/colors.dart';
-import 'package:musleapp/pages/dishes_menu.dart';
+
 
 class TrainingOver extends StatelessWidget{
   const TrainingOver({super.key});
@@ -33,11 +33,11 @@ class TrainingOver extends StatelessWidget{
               child: Container(
                 margin: EdgeInsets.only(bottom: 10),
                 width: MediaQuery.of(context).size.width - 40,
-                height: MediaQuery.of(context).size.width - 180,
+                height: MediaQuery.of(context).size.width,
                 child: Align(
                   alignment: Alignment.center,
                   child: Text(
-                    'Теперь можно и подкрепиться! \nВот варианты:',
+                    'Теперь можно и подкрепиться! \n\n Варианты можешь найти в разделе "Еда" в главном меню',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 28,
@@ -49,10 +49,7 @@ class TrainingOver extends StatelessWidget{
                 )
               ),
             ),
-            Align(
-              alignment: Alignment.center,
-              child: DishesMenu(),
-            ),
+            
             Container(
               margin: EdgeInsets.only(top: 40),
               decoration: BoxDecoration(

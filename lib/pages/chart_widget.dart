@@ -15,7 +15,7 @@ class ChartWidget extends StatefulWidget {
 }
 
 class _ChartWidgetState extends State<ChartWidget> {
-  Future<List<dynamic>>? exercises;
+  Future<Map<String,dynamic>>? exercises;
 
   List<String> chart_titles = [
     '',
@@ -37,7 +37,7 @@ class _ChartWidgetState extends State<ChartWidget> {
     "Сгибание рук со штангой/гантелями",
     "Tricep Pushdown"
   ];
-  String chart_title = '';
+  String? chart_title = null;
   List<ChartData> data = [
     ChartData('1-я неделя', 0),
     ChartData('2-я неделя', 0),
@@ -80,7 +80,7 @@ class _ChartWidgetState extends State<ChartWidget> {
       width: MediaQuery.of(context).size.width,
       child: Column(
         children: [
-          FutureBuilder<List<dynamic>>(
+          FutureBuilder<Map<String,dynamic>>(
             future: exercises,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -91,7 +91,7 @@ class _ChartWidgetState extends State<ChartWidget> {
                 return Text('Нет доступных упражнений');
               }
 
-              List<dynamic> exercisesList = snapshot.data!;
+              List<dynamic> exercisesList = snapshot.data!["\$values"];
 
               return Align(
                 alignment: Alignment.center,
@@ -109,7 +109,7 @@ class _ChartWidgetState extends State<ChartWidget> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          chart_title,
+                          chart_title ?? 'Выберите упражнение',
                           style: TextStyle(fontSize: 16),
                         ),
                         Icon(Icons.arrow_drop_down),
@@ -119,7 +119,7 @@ class _ChartWidgetState extends State<ChartWidget> {
                   onSelected: (int index) {
                     setState(() {
                       chart_title = chart_titles[index + 1];
-                      UpdateData(DataSerializer.serialize(exercisesList[index]["progress"]));
+                      UpdateData(DataSerializer.serialize(exercisesList[index]["progress"]["\$values"]));
                     });
                   },
                   itemBuilder: (BuildContext context) {
@@ -166,7 +166,7 @@ class _ChartWidgetState extends State<ChartWidget> {
               height: 250,
               margin: EdgeInsets.only(top: 20),
               child: SfCartesianChart(
-                title: ChartTitle(text: chart_title),
+                title: ChartTitle(text: chart_title ?? 'Выберите упражнение'),
                 tooltipBehavior: TooltipBehavior(
                   enable: true,
                   builder: (dynamic data, dynamic point, dynamic series, int pointIndex, int seriesIndex) {

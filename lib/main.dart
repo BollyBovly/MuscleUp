@@ -3,6 +3,7 @@ import 'package:musleapp/design/colors.dart';
 import 'package:musleapp/pages/approach_timer.dart';
 import 'package:musleapp/pages/break_page.dart';
 import 'package:musleapp/pages/main_page.dart';
+import 'package:musleapp/pages/meal_list_page.dart';
 import 'package:musleapp/pages/statistics_screen.dart';
 import 'package:musleapp/pages/training_over.dart';
 import 'package:musleapp/pages/training_start.dart';
@@ -23,9 +24,9 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: backgroundColor,
         primarySwatch: Colors.yellow,
       ),
-      home: const MainPage(),
+      home: const HomeScreen(),
       routes: <String, WidgetBuilder>{
-        '/home': (BuildContext context) => new MainPage(), 
+        '/home': (BuildContext context) => new HomeScreen(), 
         '/start': (BuildContext context) => new TrainingStart(),
         '/timer': (BuildContext context) => new ApproachTimer(),
         '/break': (BuildContext context) => new BreakPage(),
@@ -36,48 +37,67 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _HomeScreenState extends State<HomeScreen> {
+  final PageController _pageController = PageController();
+  int _selectedIndex = 0;
 
-  void _incrementCounter() {
+  final List<Widget> _screens = [
+    MainPage(),
+    StatisticsScreen(),
+    MealListPage(),
+  ];
+
+  void _onPageChanged(int index) {
     setState(() {
-      _counter++;
+      _selectedIndex = index;
     });
+  }
+
+  void _onItemTapped(int index) {
+    _pageController.animateToPage(
+      index,
+      duration: Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
-        title: Text('Mussle app'),
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: _onPageChanged,
+        physics: BouncingScrollPhysics(),
+        children: _screens,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 20,
+        backgroundColor: backgroundColor,
+        selectedItemColor: textButtonColor, // выделенный элемент — КРАСНЫЙ
+        unselectedItemColor: Colors.grey, // остальные — серые
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.fitness_center),
+            label: 'Тренировка',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bar_chart),
+            label: 'Статистика',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.fastfood),
+            label: 'Еда',
+          ),
+        ],
       ),
     );
   }
