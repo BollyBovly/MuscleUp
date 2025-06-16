@@ -24,11 +24,16 @@ class ApiService {
     }
   }
 
-  static Future<void> addProgress(int exerciseId, int weight) async {
+  static Future<void> addProgress(
+    int exerciseId,
+    String date,
+    int weight,
+  ) async {
+    final url = Uri.parse('$baseUrl/exercises/$exerciseId/progress');
     final response = await http.post(
-      Uri.parse('$baseUrl/exercises/$exerciseId/progress'),
+      url,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'weight': weight}),
+      body: jsonEncode({'date': date, 'weight': weight}),
     );
 
     if (response.statusCode != 200) {
@@ -42,19 +47,22 @@ class ApiService {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      throw Exception('Ошибка ${response.statusCode} при получении веса пользователя');
+      throw Exception(
+        'Ошибка ${response.statusCode} при получении веса пользователя',
+      );
     }
   }
 
-  static Future<void> addUserBodyWeight(int weight) async {
+  static Future<void> addUserBodyWeight(String date, int weight) async {
+    final url = Uri.parse('$baseUrl/UserWeight/1/progress');
     final response = await http.post(
-      Uri.parse('$baseUrl/UserWeight/1/progress'),
+      url,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'weight': weight}),
+      body: jsonEncode({'date': date, 'weight': weight}),
     );
 
     if (response.statusCode != 200) {
-      throw Exception('Ошибка ${response.statusCode} при добавлении веса пользователя');
+      throw Exception('Ошибка при добавлении веса пользователя');
     }
   }
 }
