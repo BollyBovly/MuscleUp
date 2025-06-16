@@ -14,7 +14,7 @@ class StatisticsScreen extends StatefulWidget{
 }
 
 class StatisticsScreenState extends State<StatisticsScreen>{
-  Future<List<dynamic>>? weight;
+  Future<Map<String,dynamic>>? weight;
    late SelectionBehavior _selectionBehavior;
    
 
@@ -36,18 +36,8 @@ class StatisticsScreenState extends State<StatisticsScreen>{
       appBar: AppBar(
         title: const Text('Статистика'),
         backgroundColor: backgroundColor,
-        leading: Align(alignment: Alignment.centerRight, child: Builder(
-          builder: (context){
-            return IconButton(
-                onPressed: () => Navigator.of(context).pop(),
-                icon: const Icon(Icons.arrow_back),
-                alignment: Alignment.center,
-            );
-          }
-        ),
-        ),
       ),
-      body: FutureBuilder<List<dynamic>>(
+      body: FutureBuilder<Map<String,dynamic>>(
         future: weight,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -57,7 +47,7 @@ class StatisticsScreenState extends State<StatisticsScreen>{
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return Text('Нет доступных упражнений');
           } else {
-            List<dynamic> weightList = snapshot.data!;
+            List<dynamic> weightList = snapshot.data!["\$values"][0]["progress"]["\$values"];
 
               return Container(
               width: MediaQuery.of(context).size.width,
@@ -71,7 +61,7 @@ class StatisticsScreenState extends State<StatisticsScreen>{
                       width: MediaQuery.of(context).size.width,
                       height: 250,
                       child: SfCartesianChart(
-                        title: ChartTitle(text: 'Вес'),
+                        title: const ChartTitle(text: 'Вес'),
                         primaryXAxis: CategoryAxis(),
                         tooltipBehavior: TooltipBehavior(
                           enable: true,
@@ -113,7 +103,7 @@ class StatisticsScreenState extends State<StatisticsScreen>{
                         series: <CartesianSeries>[
                           LineSeries<ChartData, String>(
                             name: '',
-                            dataSource: DataSerializer.serialize(weightList[0]['progress']),
+                            dataSource: DataSerializer.serialize(weightList),
                             xValueMapper: (ChartData data, _) => data.x,
                             yValueMapper: (ChartData data, _) => data.y,
                             color: Colors.red,
