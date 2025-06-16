@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:musleapp/design/colors.dart';
-//import 'package:musleapp/pages/dishes_menu.dart';
 import 'package:musleapp/pages/start_button.dart';
 import 'package:musleapp/pages/training_description.dart';
 import 'package:musleapp/pages/week_bar.dart';
@@ -23,16 +22,6 @@ class MainPage extends StatelessWidget {
           ),
         ),
         backgroundColor: backgroundColor,
-        leading: Align(alignment: Alignment.centerRight, child: Builder(
-          builder: (context){
-            return IconButton(
-                onPressed: () => Navigator.of(context).pushNamed('/stat'),
-                icon: const Icon(Icons.show_chart),
-                alignment: Alignment.center,
-            );
-          }
-        ),
-        )
       ),
       body: Container(
         margin: EdgeInsets.only(top: 10),
@@ -78,6 +67,4 @@ class MainPage extends StatelessWidget {
       ),
     );
   }
-  //
-  //хуй
 }

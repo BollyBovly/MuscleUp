@@ -12,9 +12,9 @@ class ProgressEntry {
 
 class ApiService {
   static const String baseUrl =
-      'https://duplicate-shows-commissioner-griffin.trycloudflare.com/api';
+      'https://type-protecting-valid-ukraine.trycloudflare.com/api';
 
-  static Future<List<dynamic>> getExercises() async {
+  static Future<Map<String,dynamic>> getExercises() async {
     final response = await http.get(Uri.parse('$baseUrl/Exercises'));
 
     if (response.statusCode == 200) {
@@ -37,7 +37,7 @@ class ApiService {
     }
   }
 
-  static Future<List<dynamic>> getUserBodyWeight() async {
+  static Future<Map<String,dynamic>> getUserBodyWeight() async {
     final response = await http.get(Uri.parse('$baseUrl/UserWeight'));
 
     if (response.statusCode == 200) {
