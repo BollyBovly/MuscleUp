@@ -24,16 +24,12 @@ class ApiService {
     }
   }
 
-  static Future<void> addProgress(
-    int exerciseId,
-    String date,
-    int weight,
-  ) async {
+  static Future<void> addProgress(int exerciseId, int weight) async {
     final url = Uri.parse('$baseUrl/exercises/$exerciseId/progress');
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'date': date, 'weight': weight}),
+      body: jsonEncode({'weight': weight}),
     );
 
     if (response.statusCode != 200) {
@@ -53,12 +49,12 @@ class ApiService {
     }
   }
 
-  static Future<void> addUserBodyWeight(String date, int weight) async {
+  static Future<void> addUserBodyWeight(int weight) async {
     final url = Uri.parse('$baseUrl/UserWeight/1/progress');
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'date': date, 'weight': weight}),
+      body: jsonEncode({'weight': weight}),
     );
 
     if (response.statusCode != 200) {
