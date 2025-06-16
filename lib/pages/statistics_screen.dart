@@ -133,11 +133,3 @@ class StatisticsScreenState extends State<StatisticsScreen>{
   }
   
 }
-
-class Title{
-  static String chartName = 'Вес';
-
-  void UpdateName(String name){
-    chartName = name;
-  }
-}

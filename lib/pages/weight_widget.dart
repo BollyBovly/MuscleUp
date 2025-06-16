@@ -87,7 +87,7 @@ class _WeightInputWidgetState extends State<WeightInputWidget> {
                           {
                             // Вызываем метод ApiService.addUser BodyWeight с введенным весом
                             ApiService.addProgress(
-                              TrainingController.ex_index + 1,
+                              TrainingController.ex_index + 18,
                               weight!,
                             ),
                             _weightController.clear(),
