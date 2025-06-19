@@ -1,16 +1,17 @@
-# musleapp
+# MuscleUp SFU studio
 
-A new Flutter project.
+Мы команда из 5 человек, создали для людей приложение, которое позволит им достичь желаемой физической формы
 
-## Getting Started
+## Почему мы?
 
-This project is a starting point for a Flutter application.
+- Уведомления о тренировках
+- План тренировок
+- Советы по питанию
+- Отслеживание индивидуального прогресса
 
-A few resources to get you started if this is your first Flutter project:
+## Стек разработки
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+**Client:** Flutter
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Server:** ASP.NET Core, SQLite
+**API:** https://github.com/BollyBovly/api
