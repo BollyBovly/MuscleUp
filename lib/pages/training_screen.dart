@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:musleapp/design/colors.dart';
 import 'package:musleapp/pages/weight_widget.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 
 class TrainingScreen extends StatelessWidget{
@@ -48,7 +49,16 @@ class TrainingScreen extends StatelessWidget{
                 //   ),
                 // ],
               ),
-              child: Image.network(gif_url)
+              child: CachedNetworkImage(
+                imageUrl: gif_url,
+                placeholder: (context, url) => Container(
+                  alignment: Alignment.center,
+                  width: 40,
+                  height: 40,
+                  child: CircularProgressIndicator()
+                ),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              )
               
             ),
           ),

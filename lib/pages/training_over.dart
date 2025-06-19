@@ -64,7 +64,7 @@ class TrainingOver extends StatelessWidget{
                 ],
               ),
               child: ElevatedButton(
-                onPressed: () => {Navigator.of(context).pushNamed('/home')},
+                onPressed: () => {Navigator.of(context).popUntil((route) => route.isFirst)},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFFFFFFFF),
                   minimumSize: Size(MediaQuery.of(context).size.width - 150, MediaQuery.of(context).size.width - 300),

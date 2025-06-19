@@ -38,7 +38,12 @@ class TrainingStartState extends State<TrainingStart>{
         leading: Align(alignment: Alignment.centerRight, child: Builder(
           builder: (context){
             return IconButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => {
+                  Navigator.of(context).pop(),
+                  if (TrainingController.ex_index > 0){
+                    TrainingController.ex_index -= 1
+                  }
+                },
                 icon: const Icon(Icons.arrow_back),
                 alignment: Alignment.center,
             );

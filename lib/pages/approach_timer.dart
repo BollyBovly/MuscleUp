@@ -169,6 +169,7 @@ class _ApproachTimerState extends State<ApproachTimer> {
                   }
                   else{
                     Navigator.of(context).pushNamed('/over');
+                    TrainingController.ex_index = 0;
                   }
                   
                   

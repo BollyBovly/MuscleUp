@@ -14,6 +14,8 @@ class ChartWidget extends StatefulWidget {
   }
 }
 
+enum FilterType { last7, firstAndLast }
+
 class _ChartWidgetState extends State<ChartWidget> {
   Future<Map<String,dynamic>>? exercises;
 
@@ -50,6 +52,28 @@ class _ChartWidgetState extends State<ChartWidget> {
 
   late SelectionBehavior _selectionBehavior;
 
+  FilterType _selectedFilter = FilterType.last7; // по умолчанию
+  List<ChartData> _allData = [];
+  // Карта для отображаемых названий в Dropdown
+  final Map<FilterType, String> filterNames = {
+    FilterType.last7: 'Последние 7 изменений',
+    FilterType.firstAndLast: 'Первое и последнее',
+  };
+
+  // Метод для фильтрации данных согласно выбранному фильтру
+  List<ChartData> _getFilteredData(List<ChartData> originalData) {
+    if (_selectedFilter == FilterType.last7) {
+      // Возвращаем последние 7 элементов (или все, если меньше 7)
+      if (originalData.length <= 7) return originalData;
+      return originalData.sublist(originalData.length - 7);
+    } else if (_selectedFilter == FilterType.firstAndLast) {
+      if (originalData.isEmpty) return [];
+      if (originalData.length == 1) return originalData;
+      return [originalData.first, originalData.last];
+    }
+    return originalData;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -75,14 +99,17 @@ class _ChartWidgetState extends State<ChartWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 20),
-      height: 340,
+      margin: EdgeInsets.only(top: 10),
+      height: 400,  // увеличил высоту, чтобы вместить фильтр
       width: MediaQuery.of(context).size.width,
       child: Column(
         children: [
+          // ... FutureBuilder и PopupMenuButton - без изменений
+
           FutureBuilder<Map<String,dynamic>>(
             future: exercises,
             builder: (context, snapshot) {
+              // ... твой код FutureBuilder
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return CircularProgressIndicator(); // Индикатор загрузки
               } else if (snapshot.hasError) {
@@ -93,137 +120,165 @@ class _ChartWidgetState extends State<ChartWidget> {
 
               List<dynamic> exercisesList = snapshot.data!["\$values"];
 
-              return Align(
-                alignment: Alignment.center,
-                child: PopupMenuButton<int>(
-                  color: backgroundColor,
-                  tooltip: 'Выберите упражнение',
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(4),
+              return Column(
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: PopupMenuButton<int>(
                       color: backgroundColor,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          chart_title ?? 'Выберите упражнение',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        Icon(Icons.arrow_drop_down),
-                      ],
-                    ),
-                  ),
-                  onSelected: (int index) {
-                    setState(() {
-                      chart_title = chart_titles[index + 1];
-                      UpdateData(DataSerializer.serialize(exercisesList[index]["progress"]["\$values"]));
-                    });
-                  },
-                  itemBuilder: (BuildContext context) {
-                    // Ограничиваем высоту меню и делаем прокручиваемым
-                    return [
-                      PopupMenuItem(
-                        enabled: false,
-                        child: Container(
-                          width: 250,
-                          height: 200, // высота меню с прокруткой
+                      tooltip: 'Выберите упражнение',
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(4),
                           color: backgroundColor,
-                          child: Scrollbar(
-                            
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: exercisesList.length,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  contentPadding: EdgeInsets.all(0),
-                                  tileColor: backgroundColor,
-                                  title: Text(
-                                    exercisesList[index]['name'],
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                  onTap: () {
-                                    Navigator.pop(context, index);
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              chart_title ?? 'Выберите упражнение',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            Icon(Icons.arrow_drop_down),
+                          ],
+                        ),
+                      ),
+                      onSelected: (int index) {
+                        setState(() {
+                          chart_title = chart_titles[index + 1];
+                          _allData = DataSerializer.serialize(exercisesList[index]["progress"]["\$values"]);
+                          data = _getFilteredData(_allData);
+                        });
+                      },
+                      itemBuilder: (BuildContext context) {
+                        return [
+                          PopupMenuItem(
+                            enabled: false,
+                            child: Container(
+                              width: 250,
+                              height: 200,
+                              color: backgroundColor,
+                              child: Scrollbar(
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: exercisesList.length,
+                                  itemBuilder: (context, index) {
+                                    return ListTile(
+                                      contentPadding: EdgeInsets.all(0),
+                                      tileColor: backgroundColor,
+                                      title: Text(
+                                        exercisesList[index]['name'],
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                      onTap: () {
+                                        Navigator.pop(context, index);
+                                      },
+                                    );
                                   },
-                                );
-                              },
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                    ];
-                  },
-                ),
-              );
-            },
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: 250,
-              margin: EdgeInsets.only(top: 20),
-              child: SfCartesianChart(
-                title: ChartTitle(text: chart_title ?? 'Выберите упражнение'),
-                tooltipBehavior: TooltipBehavior(
-                  enable: true,
-                  builder: (dynamic data, dynamic point, dynamic series, int pointIndex, int seriesIndex) {
-                    final ChartData item = data as ChartData;
+                        ];
+                      },
+                    ),
+                  ),
 
-                    return Container(
-                      width: 160,
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 204),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(Icons.calendar_today, color: Colors.white, size: 14),
-                              const SizedBox(width: 6),
-                              Text('Дата: ${item.x}', style: TextStyle(color: Colors.white)),
-                            ],
-                          ),
-                          const SizedBox(height: 4),
-                          Row(
-                            children: [
-                              Icon(Icons.fitness_center, color: Colors.white, size: 14),
-                              const SizedBox(width: 6),
-                              Text('Вес: ${item.y} кг', style: TextStyle(color: Colors.white)),
-                            ],
+                  // График
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 220,
+                      margin: EdgeInsets.only(top: 10),
+                      child: SfCartesianChart(
+                        
+                        tooltipBehavior: TooltipBehavior(
+                          enable: true,
+                          builder: (dynamic dataPoint, dynamic point, dynamic series, int pointIndex, int seriesIndex) {
+                            final ChartData item = dataPoint as ChartData;
+
+                            return Container(
+                              width: 160,
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(Icons.calendar_today, color: Colors.white, size: 14),
+                                      const SizedBox(width: 6),
+                                      Text('Дата: ${item.x}', style: TextStyle(color: Colors.white)),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Row(
+                                    children: [
+                                      Icon(Icons.fitness_center, color: Colors.white, size: 14),
+                                      const SizedBox(width: 6),
+                                      Text('Вес: ${item.y} кг', style: TextStyle(color: Colors.white)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                        primaryXAxis: CategoryAxis(),
+                        series: <CartesianSeries>[
+                          LineSeries<ChartData, String>(
+                            name: '',
+                            dataSource: data,
+                            xValueMapper: (ChartData data, _) => data.x,
+                            yValueMapper: (ChartData data, _) => data.y,
+                            color: Colors.red,
+                            enableTooltip: true,
+                            selectionBehavior: _selectionBehavior,
+                            markerSettings: MarkerSettings(
+                              isVisible: true,
+                              width: 6,
+                              height: 6,
+                              borderWidth: 2,
+                              shape: DataMarkerType.circle,
+                            ),
                           ),
                         ],
                       ),
-                    );
-                  },
-                ),
-                primaryXAxis: CategoryAxis(),
-                series: <CartesianSeries>[
-                  LineSeries<ChartData, String>(
-                    name: '',
-                    dataSource: data,
-                    xValueMapper: (ChartData data, _) => data.x,
-                    yValueMapper: (ChartData data, _) => data.y,
-                    color: Colors.red,
-                    enableTooltip: true,
-                    selectionBehavior: _selectionBehavior,
-                    markerSettings: MarkerSettings(
-                      isVisible: true,
-                      width: 6,  // обычный размер точки
-                      height: 6,
-                      borderWidth: 2,
-                      shape: DataMarkerType.circle,
+                    ),
+                  ),
+
+                  // Выпадающий список фильтрации
+                  Container(
+                    color: backgroundColor,
+                    margin: EdgeInsets.only(top: 2),
+                    child: DropdownButton<FilterType>(
+                      dropdownColor: backgroundColor,
+                      value: _selectedFilter,
+                      items: FilterType.values.map((FilterType filter) {
+                        return DropdownMenuItem<FilterType>(
+                          value: filter,
+                          child: Text(filterNames[filter]!),
+                        );
+                      }).toList(),
+                      onChanged: (FilterType? newFilter) {
+                        if (newFilter == null) return;
+                        setState(() {
+                          _selectedFilter = newFilter;
+                          data = _getFilteredData(_allData);
+                        });
+                      },
                     ),
                   ),
                 ],
-              ),
-            ),
+              );
+            },
           ),
         ],
       ),
